@@ -1,4 +1,4 @@
-# Automated_testing_coreutils
+# Automated testing tool for coreutils
 
 This tools tests three functionalitites simultaneously:
 1) ROP Gadget Count
