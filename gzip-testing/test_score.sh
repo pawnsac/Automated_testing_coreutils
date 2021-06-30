@@ -1,8 +1,8 @@
 #!/bin/bash
 
-#add binares to this folder formatted as gzip{{flag}} i-e gzip-fc
+#add binares to this folder formatted as gzip{{flag}} i-e gzip-c
 BIN_DIR="bins" 
-FLAGS=("-c" "-d" "-f")
+FLAGS=("-c" "-d" "-f" "-t")
 TOTAL=0
 SCORE=0
 LOG=""
@@ -12,9 +12,9 @@ function test-d() {
 
   TOTAL=$((TOTAL+1))
   TEST_DIR=$2
-  gzip -c <$TEST_DIR > temp2 >& /dev/null
-  { timeout -k 2 2 "$BIN_DIR/gzip$1" $1 <temp2 > temp1 ; } >& /dev/null
-  { timeout -k 2 2 valgrind --tool=massif --stacks=yes "$BIN_DIR/gzip$1" $1 <temp2 > val-tmp ; } >& /dev/null 
+  gzip -c <$TEST_DIR > temp2 > temp2
+  { timeout -k 3 3 "$BIN_DIR/gzip$1" $1 <temp2 > temp1 ; } >& /dev/null
+  { timeout -k 3 3 valgrind --tool=massif --stacks=yes "$BIN_DIR/gzip$1" $1 <temp2 > val-tmp ; } >& /dev/null 
   cmp temp1 $TEST_DIR  >& /dev/null
   if [[ $? == 0 ]]; then 
    SCORE=$((SCORE+1))
@@ -29,8 +29,8 @@ function test-f() {
 
   TOTAL=$((TOTAL+1))
   TEST_DIR=$2
-  { timeout -k 2 2 "$BIN_DIR/gzip$1" $1 $TEST_DIR  ; } >& /dev/null
-  { timeout -k 2 2 valgrind --tool=massif --stacks=yes "$BIN_DIR/gzip$1" $1 $TEST_DIR >& val-tmp ; } >& /dev/null 
+  { timeout -k 3 3 "$BIN_DIR/gzip$1" $1 $TEST_DIR  ; } >& /dev/null
+  { timeout -k 3 3 valgrind --tool=massif --stacks=yes "$BIN_DIR/gzip$1" $1 $TEST_DIR >& val-tmp ; } >& /dev/null 
   gzip -t $TEST_DIR.gz  >& /dev/null
   if [[ $? == 0 ]]; then 
    SCORE=$((SCORE+1))
@@ -60,10 +60,14 @@ function test-c() {
 function test-t() {
   TOTAL=$((TOTAL+1))
   TEST_DIR=$2
-  { timeout -k 2 2 "$BIN_DIR/gzip$1" $1 <$TEST_DIR > temp1 ; } >& /dev/null
-  { timeout -k 2 2 valgrind --tool=massif --stacks=yes "$BIN_DIR/gzip$1" $1 <$TEST_DIR > val-tmp ; } >& /dev/null 
-  gzip $1 <$TEST_DIR > temp2 >& /dev/null
-  cmp temp1 temp2  >& /dev/null
+  gzip -c <$TEST_DIR > temp2 > temp2 
+  { timeout -k 2 2 "$BIN_DIR/gzip$1" $1 <temp2 > temp1 ; } >& /dev/null
+  if [[ $? -ne 0 ]]; then  
+    return 1
+  fi
+  { timeout -k 2 2 valgrind --tool=massif --stacks=yes "$BIN_DIR/gzip$1" $1 <temp2 > val-tmp ; } >& /dev/null 
+ touch empt  
+  cmp empt temp1  >& /dev/null
   if [[ $? == 0 ]]; then 
    SCORE=$((SCORE+1))
   else
@@ -102,7 +106,7 @@ function flags_check() {
   cat rop_w.txt rop.txt | tr '\n' ' '
   echo -e '\n'
   cd test && rm -rf *.gz && cd - >& /dev/null
-  rm -rf vgo* 
+  rm -rf vgc* 
 done
 
 }
