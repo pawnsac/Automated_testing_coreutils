@@ -14,11 +14,11 @@ This tools tests three functionalitites simultaneously:
 
 # Requirements Installation
 
-1.``` pip3 install capstone ```
+  ``` pip3 install capstone ```
 
-2.``` pip3 install ropgadget ```
+  ``` pip3 install ropgadget ```
 
-3.``` sudo apt install valgrind ```
+  ``` sudo apt install valgrind ```
 # Demo Usage
 
 <img src="https://github.com/pawnsac/Automated_testing_coreutils/blob/main/demo/pic_1.jpeg?raw=true" alt="alt text" width="400" height="400">
