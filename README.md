@@ -19,4 +19,5 @@ This tools tests three functionalitites simultaneously:
 3. sudo apt install valgrind 
 # Demo Usage
 
-![Alt text](https://github.com/pawnsac/Automated_testing_coreutils/blob/main/demo/pic_1.jpeg?raw=true =250x250)
+<img src="https://github.com/pawnsac/Automated_testing_coreutils/blob/main/demo/pic_1.jpeg?raw=true" alt="alt text" width="250" height="250">
+
