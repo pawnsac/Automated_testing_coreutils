@@ -1,6 +1,6 @@
 # Automated testing tool for coreutils
 
-This tools tests three functionalitites simultaneously:
+This tool tests the following functionalitites:
 1) ROP Gadget Count
 2) Correctness Test Cases
 3) Total Memory Usage (using valgrind)
