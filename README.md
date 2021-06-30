@@ -17,3 +17,6 @@ This tools tests three functionalitites simultaneously:
 1. pip3 install capstone
 2. pip3 install ropgadget
 3. sudo apt install valgrind 
+# Demo Usage
+
+![Alt text](demo/pic1.jpeg?raw=true "gzip testing")
