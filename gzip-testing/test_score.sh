@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#add binares to this folder formatted as gzip{{flag}} i-e gzip-c
+#add binares to this folder formatted as gzip{{flag}} i-e gzip-fc
 BIN_DIR="bins" 
 FLAGS=("-c" "-d" "-f" "-t")
 TOTAL=0
