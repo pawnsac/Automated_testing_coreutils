@@ -19,4 +19,4 @@ This tools tests three functionalitites simultaneously:
 3. sudo apt install valgrind 
 # Demo Usage
 
-![Alt text](demo/pic1.jpeg?raw=true "gzip testing")
+![Alt text](https://github.com/pawnsac/Automated_testing_coreutils/demo/pic1.jpeg?raw=true "gzip testing")
